@@ -2,8 +2,8 @@
 
 Simple test challenge.
 
-`backend` - PHP based REST API
-`fronend` - TypeScript based App (NuxtJS which is VueJS based)
+- `backend` - PHP based REST API
+- `fronend` - TypeScript based App (NuxtJS which is VueJS based)
 
 ## dependencies/reqs
 
