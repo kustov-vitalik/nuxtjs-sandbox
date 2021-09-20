@@ -15,7 +15,13 @@ artisan: ## make artisan command=list
 backend-start: ## start BE
 	cd backend; \
     php composer.phar install -o; \
+    cp .env.example .env; \
     ./vendor/bin/sail up -d; \
+    cd ..;
+
+backend-stop: ## stop BE
+	cd backend; \
+    ./vendor/bin/sail down; \
     cd ..;
 
 frontend-start: ## start FE
@@ -27,5 +33,7 @@ frontend-start: ## start FE
 
 start: ## start everything
 	make backend-start; \
+    make artisan command='migrate:refresh'; \
     make artisan command='db:seed'; \
+    make artisan command='jwt:secret'; \
     make frontend-start;
