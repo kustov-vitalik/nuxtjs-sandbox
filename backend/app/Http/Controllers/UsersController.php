@@ -27,12 +27,12 @@ class UsersController extends Controller
         $this->userService = $userService;
     }
 
-    public function listUsers(Pageable $pageable): PageableResult
+    public function getList(Pageable $pageable): PageableResult
     {
         return $this->userService->userList($pageable);
     }
 
-    public function getUser(int $userId): User
+    public function get(int $userId): User
     {
         try {
             return $this->userService->getUser($userId);

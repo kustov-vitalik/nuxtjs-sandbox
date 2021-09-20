@@ -13,6 +13,8 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "importHelpers": true,
+    "noEmitHelpers": false,
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
@@ -28,6 +30,7 @@
       "@types/node",
       "@nuxtjs/axios",
       "@nuxtjs/auth-next",
+      "@nuxtjs/toast",
     ]
   },
   "exclude": [

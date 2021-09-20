@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - NustJS',
-    title: 'frontend',
+    titleTemplate: '%s - NuxtJS FE & Laravel BE',
+    title: 'Sandbox',
     htmlAttrs: {
       lang: 'en'
     },
@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios-accessor',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,19 +46,33 @@ export default {
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/auth-next',
+    '@nuxtjs/toast',
   ],
+
+
+  axios: {
+    proxy: false, // Can be also an object with default options
+    baseURL: 'http://localhost/api',
+    headers: {
+      common: {
+        'Accept': 'application/json',
+      },
+      delete: {},
+      get: {},
+      head: {},
+      post: {},
+      put: {},
+      patch: {}
+    },
+
+
+  },
 
   auth: {
     strategies: {
       'laravelJWT': {
         provider: 'laravel/jwt',
         url: 'http://localhost',
-        endpoints: {
-          login: '/api/auth/login',
-          logout: '/api/auth/logout',
-          me: '/api/auth/user',
-          refresh: '/api/auth/refresh',
-        },
         token: {
           property: 'access_token',
           maxAge: 60 * 60
@@ -66,7 +81,20 @@ export default {
           maxAge: 20160 * 60
         },
       },
+    },
+
+    redirect: {
+      login: '/LoginPage', // User will be redirected to this path if login is required.
+      logout: '/LoginPage', // User will be redirected to this path if after logout, current route is protected.
+      callback: false, // User will be redirected to this path by the identity provider after login. (Should match configured Allowed Callback URLs (or similar setting) in your app/client with the identity provider)
+      home: '/', // User will be redirected to this path after login. (rewriteRedirects will rewrite this path)
     }
+  },
+
+  toast: {
+    position: 'bottom-right',
+    duration: 7000,
+    keepOnHover: true,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

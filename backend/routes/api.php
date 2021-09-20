@@ -26,15 +26,15 @@ Route::group([
     Route::get('user', [AuthController::class, 'user']);
 });
 
-// todo add auth middleware
 Route::group([
-    'middleware' => ['api'],
+    'middleware' => ['api', 'auth:api'],
     'prefix' => 'users'
 ], static function () {
-    Route::get('', [UsersController::class, 'listUsers']);
+    Route::get('', [UsersController::class, 'getList']);
     Route::post('', [UsersController::class, 'create']);
     Route::put('/{userId}', [UsersController::class, 'update']);
-    Route::get('/{userId}', [UsersController::class, 'getUser']);
+    Route::get('/{userId}', [UsersController::class, 'get']);
+    Route::delete('/{userId}', [UsersController::class, 'delete']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
